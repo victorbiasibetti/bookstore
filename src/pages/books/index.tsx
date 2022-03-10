@@ -7,7 +7,7 @@ const BooksPage: React.FC = () => {
   return <Books />;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const access_token = req?.cookies?.access_token || null;
   if (!access_token)
     return {
