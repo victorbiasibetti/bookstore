@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import Books from "../../modules/books";
+import { Books } from "../../modules/books";
 // import { Container } from './styles';
 
 const BooksPage: React.FC = () => {
@@ -8,7 +8,7 @@ const BooksPage: React.FC = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const access_token = req?.cookies?.access_token || null;
+  const access_token = req?.cookies?.access_token;
   if (!access_token)
     return {
       redirect: {

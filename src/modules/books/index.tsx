@@ -1,9 +1,4 @@
-import React from "react";
+import Books from "./books";
+import NewBook from "./new";
 
-// import { Container } from './styles';
-
-const Books: React.FC = () => {
-  return <div>Books</div>;
-};
-
-export default Books;
+export { Books, NewBook };
