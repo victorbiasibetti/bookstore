@@ -1,0 +1,13 @@
+{
+  "user": {
+    "email": "teste@teste.com",
+    "password": "teste"
+  },
+  "books": [
+    {
+      "id": 1,
+      "title": "title book 1",
+      "rentedBy": null
+    }
+  ]
+}
