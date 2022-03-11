@@ -15,6 +15,7 @@ const Login: React.FC = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = () => {
     console.log("login", login);
@@ -30,6 +31,7 @@ const Login: React.FC = () => {
           router.push("/books");
         } else {
           console.log("error");
+          setError("Usuário ou Senha incorretos");
         }
       });
   };
@@ -50,6 +52,8 @@ const Login: React.FC = () => {
         onChange={(e) => setLogin({ ...login, password: e.target.value })}
       />
       <button onClick={handleLogin}>Login</button>
+
+      <span style={{ display: error ?? "show" }}> {error}</span>
     </div>
   );
 };
