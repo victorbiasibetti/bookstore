@@ -12,7 +12,6 @@ type LoginType = {
 };
 
 const Login: React.FC = () => {
-  const router = useRouter();
   const [login, setLogin] = useState<LoginType>({
     id: 0,
     email: "",
@@ -21,17 +20,16 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
-    console.log("login", login);
     try {
       const { data }: { data: Array<LoginType> | null } = await request.get(
         "/users"
       );
-
       if (data) {
         const user = data.find(
           (user) => user.email == login.email && user.password == login.password
         );
-        cookies.set("access_token", user?.id);
+        if (user) cookies.set("access_token", user?.id);
+        else setError("usuário ou senha incorreto");
       }
     } catch (e) {
       setError("usuário ou senha incorreto");
@@ -44,14 +42,20 @@ const Login: React.FC = () => {
       <input
         placeholder={"E-mail"}
         value={login.email}
-        onChange={(e) => setLogin({ ...login, email: e.target.value })}
+        onChange={(e) => {
+          setLogin({ ...login, email: e.target.value });
+          setError(null);
+        }}
       />
       <span>Password: </span>
       <input
         type={"password"}
         placeholder={"Password"}
         value={login.password}
-        onChange={(e) => setLogin({ ...login, password: e.target.value })}
+        onChange={(e) => {
+          setLogin({ ...login, password: e.target.value });
+          setError(null);
+        }}
       />
       <button onClick={handleLogin}>Login</button>
 

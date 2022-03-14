@@ -18,39 +18,19 @@
       "rentedBy": 2
     },
     {
-      "id": 2,
-      "title": "title book 2",
-      "rentedBy": "1"
-    },
-    {
       "id": 3,
-      "title": "title book 3",
-      "rentedBy": "1"
+      "title": "title book 3126666",
+      "rentedBy": null
     },
     {
+      "title": "ccccwwwwqwewq",
       "id": 4,
-      "title": "title book 4",
       "rentedBy": null
     },
     {
+      "title": "22222",
       "id": 5,
-      "title": "title book 5",
-      "rentedBy": null
-    },
-    {
-      "id": 6,
-      "title": "title book 6",
-      "rentedBy": null
-    },
-    {
-      "id": 7,
-      "title": "teste",
-      "rentedBy": null
-    },
-    {
-      "id": 8,
-      "title": "teste",
-      "rentedBy": null
+      "rentedBy": "1"
     }
   ]
 }
