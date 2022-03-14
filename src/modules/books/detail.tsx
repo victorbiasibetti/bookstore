@@ -1,24 +1,44 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { IBooks } from "../../interfaces/books";
 import request from "../../services/request";
 
 // import { Container } from './styles';
 
-const NewBook: React.ElementType = ({ book }: { book: IBooks }) => {
-  const handleAddBook = async () => {
-    const response = await request.patch(`/books`, {
-      title: "teste",
-      rentedBy: null,
-    });
-    console.log("response", response);
+const DetailBook: React.ElementType = ({ book }: { book: IBooks }) => {
+  const router = useRouter();
+
+  //prevent direct access
+  useEffect(() => {
+    if (book.rentedBy) router.push(`/books`);
+  });
+
+  const [title, setTitle] = useState<string>(book.title);
+
+  const handleUpdateBook = async () => {
+    try {
+      await request.patch(`/books/${book.id}`, {
+        title,
+      });
+      router.push(`/books`);
+    } catch (e) {}
   };
 
-  console.log("book", book);
   return (
     <div>
-      Detail book {book.id} - {book.title}
+      Book Detail
+      <div>
+        <label>ID - {book.id}</label>
+
+        <br />
+        <label>Title</label>
+        <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <br />
+        <button onClick={handleUpdateBook}>Update</button>
+        <button onClick={() => router.push(`/books`)}>Cancel</button>
+      </div>
     </div>
   );
 };
 
-export default NewBook;
+export default DetailBook;
