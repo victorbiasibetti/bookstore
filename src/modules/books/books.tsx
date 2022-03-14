@@ -13,40 +13,40 @@ const Books: React.ElementType = ({ books }: { books: Array<IBooks> }) => {
   const [listBooks, setListBooks] = useState<Array<IBooks>>(books);
   const [bookResearch, setBookResearch] = useState<string>("");
 
-  const handleRentBook = useCallback(
-    async (id: number) => {
-      const access_token = cookies.get("access_token");
+  const handleRentBook = async (id: number) => {
+    const access_token = cookies.get("access_token");
 
-      try {
-        await request.patch(`/books/${id}`, {
-          rentedBy: access_token,
-        });
+    try {
+      await request.patch(`/books/${id}`, {
+        rentedBy: access_token,
+      });
 
-        let bookIdx = listBooks.findIndex((b) => b.id === id);
-        if (bookIdx) {
-          let bookRented = listBooks[bookIdx];
-          bookRented.rentedBy = access_token;
-          setListBooks([
-            ...listBooks.slice(0, bookIdx),
-            bookRented,
-            ...listBooks.slice(bookIdx + 1),
-          ]);
-        }
-      } catch (e) {}
-    },
-    [listBooks]
-  );
+      let bookIdx = listBooks.findIndex((b) => b.id === id);
+      if (bookIdx > -1) {
+        let bookRented = listBooks[bookIdx];
+        bookRented.rentedBy = access_token;
+        setListBooks([
+          ...listBooks.slice(0, bookIdx),
+          bookRented,
+          ...listBooks.slice(bookIdx + 1),
+        ]);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const handleReturnBook = async (id: number) => {
     try {
-      const { status } = await request.patch(`/books/${id}`, {
+      await request.patch(`/books/${id}`, {
         rentedBy: null,
       });
 
       let bookIdx = listBooks.findIndex((b) => b.id === id);
-      if (bookIdx) {
+      if (bookIdx > -1) {
         let bookRented = listBooks[bookIdx];
         bookRented.rentedBy = null;
+
         setListBooks([
           ...listBooks.slice(0, bookIdx),
           bookRented,

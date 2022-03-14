@@ -12,6 +12,7 @@ type LoginType = {
 };
 
 const Login: React.FC = () => {
+  const router = useRouter();
   const [login, setLogin] = useState<LoginType>({
     id: 0,
     email: "",
@@ -28,8 +29,10 @@ const Login: React.FC = () => {
         const user = data.find(
           (user) => user.email == login.email && user.password == login.password
         );
-        if (user) cookies.set("access_token", user?.id);
-        else setError("usuário ou senha incorreto");
+        if (user) {
+          cookies.set("access_token", user?.id);
+          router.push("/books");
+        } else setError("usuário ou senha incorreto");
       }
     } catch (e) {
       setError("usuário ou senha incorreto");
