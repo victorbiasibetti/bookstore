@@ -1,12 +1,55 @@
 {
-  "user": {
-    "email": "teste@teste.com",
-    "password": "teste"
-  },
+  "users": [
+    {
+      "id": 1,
+      "email": "123",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "email": "321",
+      "password": "321"
+    }
+  ],
   "books": [
     {
       "id": 1,
       "title": "title book 1",
+      "rentedBy": 2
+    },
+    {
+      "id": 2,
+      "title": "title book 2",
+      "rentedBy": "1"
+    },
+    {
+      "id": 3,
+      "title": "title book 3",
+      "rentedBy": "1"
+    },
+    {
+      "id": 4,
+      "title": "title book 4",
+      "rentedBy": null
+    },
+    {
+      "id": 5,
+      "title": "title book 5",
+      "rentedBy": null
+    },
+    {
+      "id": 6,
+      "title": "title book 6",
+      "rentedBy": null
+    },
+    {
+      "id": 7,
+      "title": "teste",
+      "rentedBy": null
+    },
+    {
+      "id": 8,
+      "title": "teste",
       "rentedBy": null
     }
   ]
