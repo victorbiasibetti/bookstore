@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "universal-cookie";
+import request from "../../services/request";
 
 const cookies = new Cookies();
 
 type LoginType = {
+  id: number;
   email: string;
   password: string;
 };
@@ -12,28 +14,28 @@ type LoginType = {
 const Login: React.FC = () => {
   const router = useRouter();
   const [login, setLogin] = useState<LoginType>({
+    id: 0,
     email: "",
     password: "",
   });
   const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     console.log("login", login);
-    fetch("http://localhost:3004/user")
-      .then((res) => res.json())
-      .then((result) => {
-        if (
-          result.email === login.email &&
-          result.password === login.password
-        ) {
-          console.log("success");
-          cookies.set("access_token", 1);
-          router.push("/books");
-        } else {
-          console.log("error");
-          setError("Usuário ou Senha incorretos");
-        }
-      });
+    try {
+      const { data }: { data: Array<LoginType> | null } = await request.get(
+        "/users"
+      );
+
+      if (data) {
+        const user = data.find(
+          (user) => user.email == login.email && user.password == login.password
+        );
+        cookies.set("access_token", user?.id);
+      }
+    } catch (e) {
+      setError("usuário ou senha incorreto");
+    }
   };
   return (
     <div>
