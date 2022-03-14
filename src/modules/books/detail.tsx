@@ -14,11 +14,13 @@ const DetailBook: React.ElementType = ({ book }: { book: IBooks }) => {
   });
 
   const [title, setTitle] = useState<string>(book.title);
+  const [details, setDetails] = useState<string>(book.details || "");
 
   const handleUpdateBook = async () => {
     try {
       await request.patch(`/books/${book.id}`, {
         title,
+        details,
       });
       router.push(`/books`);
     } catch (e) {}
@@ -33,6 +35,12 @@ const DetailBook: React.ElementType = ({ book }: { book: IBooks }) => {
         <br />
         <label>Title</label>
         <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <br />
+        <label>Details</label>
+        <textarea
+          value={details}
+          onChange={(e) => setDetails(e.target.value)}
+        />
         <br />
         <button onClick={handleUpdateBook}>Update</button>
         <button onClick={() => router.push(`/books`)}>Cancel</button>

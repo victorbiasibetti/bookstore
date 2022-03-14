@@ -70,8 +70,11 @@ const Books: React.ElementType = ({ books }: { books: Array<IBooks> }) => {
     } catch (e) {}
   };
 
-  const handleEditBook = async (id: number) => {
+  const handleEditBook = (id: number) => {
     router.push(`/books/${id}`);
+  };
+  const handleViewBook = (idBook: number) => {
+    router.push(`/books/view/${idBook}`);
   };
 
   return (
@@ -116,6 +119,7 @@ const Books: React.ElementType = ({ books }: { books: Array<IBooks> }) => {
               {!book.rentedBy && (
                 <button onClick={() => handleEditBook(book.id)}>Edit</button>
               )}
+              <button onClick={() => handleViewBook(book.id)}>View</button>
             </div>
           ))}
     </div>

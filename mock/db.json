@@ -15,7 +15,8 @@
     {
       "id": 1,
       "title": "title book 1",
-      "rentedBy": null
+      "rentedBy": null,
+      "details": "dsadasdccccc"
     },
     {
       "id": 3,
@@ -31,11 +32,6 @@
       "title": "22222",
       "id": 5,
       "rentedBy": 1
-    },
-    {
-      "title": "qweasd",
-      "id": 6,
-      "rentedBy": null
     }
   ]
 }
